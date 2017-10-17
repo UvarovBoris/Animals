@@ -1,3 +1,4 @@
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="card_view_margin_h">16dp</dimen>
+    <dimen name="card_view_margin_v">8dp</dimen>
 </resources>
