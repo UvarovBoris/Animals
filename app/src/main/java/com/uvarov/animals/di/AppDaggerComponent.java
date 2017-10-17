@@ -1,6 +1,6 @@
 package com.uvarov.animals.di;
 
-import com.uvarov.animals.AnimalsFragment;
+import com.uvarov.animals.presentation.AnimalsFragment;
 
 import javax.inject.Singleton;
 
