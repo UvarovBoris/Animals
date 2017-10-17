@@ -24,8 +24,35 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:26.+'
+
+    def dependencies = rootProject.ext.dependencies
+
+    compile project(path: ':domain')
+
+    compile dependencies.appcompat
+    compile dependencies.support
+    compile dependencies.design
+    compile dependencies.cardview
+
+    compile dependencies.rxJava2
+    compile dependencies.rxJava2Android
+
+    compile dependencies.dagger
+    annotationProcessor dependencies.daggerCompiler
+
+    provided dependencies.javaxAnnotation
+
+    compile dependencies.moxy
+    annotationProcessor dependencies.moxyCompiler
+    compile dependencies.moxyAndroid
+    compile dependencies.moxyAppCompat
+
+    compile dependencies.butterKnife
+    annotationProcessor dependencies.butterKnifeCompiler
+
+    compile dependencies.picasso
+
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:design:26.+'
+    
     testCompile 'junit:junit:4.12'
 }

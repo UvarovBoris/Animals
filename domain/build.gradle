@@ -1,0 +1,19 @@
+apply plugin: 'java'
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    def dependencies = rootProject.ext.dependencies
+
+    compile dependencies.rxJava2
+    compileOnly  dependencies.javaxAnnotation
+    compileOnly  dependencies.javaxInject
+
+    compile dependencies.retrofit
+    compile dependencies.retrofitGsonConverter
+    compile dependencies.retrofitAdapterRxJava2
+
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
