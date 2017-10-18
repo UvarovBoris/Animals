@@ -7,6 +7,7 @@ ext {
     applicationId = 'com.uvarov.test'
     versionCode = 1;
     versionName = '1.0'
+    testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
 
     //Libraries
     addcompatVersion = '26.0.1'
@@ -19,6 +20,7 @@ ext {
     javaxInjectVersion = '1'
     moxyVersion = '1.5.3'
     picassoVersion = '2.5.2'
+    junitVersion = '4.12'
 
     dependencies = [
             appcompat             : "com.android.support:appcompat-v7:${addcompatVersion}",
@@ -47,6 +49,8 @@ ext {
             butterKnife           : "com.jakewharton:butterknife:${butterKnifeVersion}",
             butterKnifeCompiler   : "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
 
-            picasso               : "com.squareup.picasso:picasso:${picassoVersion}"
+            picasso               : "com.squareup.picasso:picasso:${picassoVersion}",
+
+            junit                 : "junit:junit:${junitVersion}"
     ]
 }

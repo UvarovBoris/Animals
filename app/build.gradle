@@ -1,16 +1,20 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+
+    def settings = rootProject.ext
+
+    compileSdkVersion settings.androidCompileSdkVersion
+    buildToolsVersion settings.androidBuildToolsVersion
     defaultConfig {
-        applicationId "com.uvarov.animals"
-        minSdkVersion 17
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        applicationId settings.applicationId
+        minSdkVersion settings.androidMinSdkVersion
+        targetSdkVersion settings.androidTargetSdkVersion
+        versionCode settings.versionCode
+        versionName settings.versionName
+        testInstrumentationRunner settings.testInstrumentationRunner
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -52,7 +56,5 @@ dependencies {
 
     compile dependencies.picasso
 
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    
-    testCompile 'junit:junit:4.12'
+    testCompile dependencies.junit
 }
