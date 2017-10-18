@@ -19,8 +19,11 @@ class AnimalListItem extends RecyclerView.ViewHolder {
     @BindView(R.id.avatar)
     ImageView avatarImageView;
 
-    @BindView(R.id.title)
-    TextView title;
+    @BindView(R.id.id_text_view)
+    TextView idTextView;
+
+    @BindView(R.id.title_text_view)
+    TextView titleTextView;
 
     private Context context;
 
@@ -33,18 +36,12 @@ class AnimalListItem extends RecyclerView.ViewHolder {
 
     public void onBindViewHolder(final Animal animal) {
 
-        title.setText(animal.getTitle());
+        idTextView.setText(String.valueOf(animal.getId()));
+        titleTextView.setText(animal.getTitle());
 
         Picasso.with(context)
                 .load(animal.getUrl())
                 .into(avatarImageView);
-
-//        GlideApp.with(context)
-//                .load(user.getAvatar())
-//                .diskCacheStrategy(DiskCacheStrategy.DATA)
-//                .placeholder(R.drawable.placeholder)
-//                .error(R.drawable.error)
-//                .into(avatarImageView);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override

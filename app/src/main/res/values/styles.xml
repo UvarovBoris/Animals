@@ -17,4 +17,11 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="RegularTextViewStyle">
+        <item name="android:layout_marginBottom">@dimen/regular_margin_half</item>
+        <item name="android:layout_marginTop">@dimen/regular_margin_half</item>
+        <item name="android:layout_marginLeft">@dimen/regular_margin</item>
+        <item name="android:layout_marginRight">@dimen/regular_margin</item>
+    </style>
+
 </resources>

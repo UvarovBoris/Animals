@@ -25,6 +25,9 @@ public class AnimalsInteractor {
                 .flatMap(new Function<ApiResponse, ObservableSource<List<Animal>>>() {
                     @Override
                     public ObservableSource<List<Animal>> apply(@NonNull ApiResponse apiResponse) throws Exception {
+                        for(int i = 0; i < apiResponse.getData().size(); i++) {
+                            apiResponse.getData().get(i).setId(i + 1);
+                        }
                         return Observable.just(apiResponse.getData());
                     }
                 });

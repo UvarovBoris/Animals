@@ -21,8 +21,10 @@ public class AnimalsDetailFragment extends Fragment {
 
     @BindView(R.id.avatar)
     ImageView avatar;
-    @BindView(R.id.title)
-    TextView title;
+    @BindView(R.id.id_text_view)
+    TextView idTextView;
+    @BindView(R.id.title_text_view)
+    TextView titleTextView;
 
     public static AnimalsDetailFragment newInstance(Animal animal) {
         AnimalsDetailFragment fragment = new AnimalsDetailFragment();
@@ -45,7 +47,9 @@ public class AnimalsDetailFragment extends Fragment {
                 .load(animal.getUrl())
                 .into(avatar);
 
-        title.setText(animal.getTitle());
+        idTextView.setText(String.valueOf(animal.getId()));
+
+        titleTextView.setText(animal.getTitle());
 
         return view;
     }
