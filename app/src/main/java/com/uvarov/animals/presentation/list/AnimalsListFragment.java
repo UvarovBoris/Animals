@@ -17,7 +17,6 @@ import com.uvarov.domain.models.Animal;
 import com.uvarov.domain.models.AnimalType;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -27,6 +26,7 @@ import butterknife.ButterKnife;
 public class AnimalsListFragment extends MvpAppCompatFragment implements AnimalsListView {
 
     private static final String ANIMAL_TYPE_KEY = "animalType";
+    private static final String ANIMAL_LIST_KEY = "animalsList";
 
     @Inject
     @InjectPresenter
@@ -36,6 +36,8 @@ public class AnimalsListFragment extends MvpAppCompatFragment implements Animals
     protected RecyclerView animalsRecyclerView;
 
     private AnimalsListAdapter animalsListAdapter;
+
+    private ArrayList<Animal> animals;
 
     @ProvidePresenter
     AnimalsListPresenter provideAnimalsPresenter() {
@@ -70,11 +72,31 @@ public class AnimalsListFragment extends MvpAppCompatFragment implements Animals
         animalsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         animalsRecyclerView.setAdapter(animalsListAdapter);
 
+        if (savedInstanceState != null) {
+            restoreState(savedInstanceState);
+        } else {
+            init();
+        }
+
         return view;
     }
 
+    private void init() {
+        animalsListPresenter.loadAnimals();
+    }
+
+    private void restoreState(Bundle state) {
+        animals = (ArrayList<Animal>) state.getSerializable(ANIMAL_LIST_KEY);
+        if (animals != null) {
+            showAnimalsList(animals);
+        } else {
+            animalsListPresenter.loadAnimals();
+        }
+    }
+
     @Override
-    public void showAnimalsList(List<Animal> animals) {
+    public void showAnimalsList(ArrayList<Animal> animals) {
+        this.animals = animals;
         animalsListAdapter.setAnimals(animals);
         animalsListAdapter.notifyDataSetChanged();
     }
@@ -83,4 +105,11 @@ public class AnimalsListFragment extends MvpAppCompatFragment implements Animals
     public void showAnimalsLoadingError() {
         Toast.makeText(getActivity(), getString(R.string.animalsLoadingError), Toast.LENGTH_LONG).show();
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(ANIMAL_LIST_KEY, animals);
+    }
+
 }

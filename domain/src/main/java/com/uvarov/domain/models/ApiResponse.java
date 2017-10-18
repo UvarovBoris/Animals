@@ -1,18 +1,18 @@
 package com.uvarov.domain.models;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class ApiResponse {
 
     private String message;
 
-    private List<Animal> data;
+    private ArrayList<Animal> data;
 
     public void setMessage(String message) {
         this.message = message;
     }
 
-    public void setData(List<Animal> data) {
+    public void setData(ArrayList<Animal> data) {
         this.data = data;
     }
 
@@ -20,7 +20,7 @@ public class ApiResponse {
         return message;
     }
 
-    public List<Animal> getData() {
+    public ArrayList<Animal> getData() {
         return data;
     }
 }

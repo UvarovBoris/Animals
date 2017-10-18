@@ -6,7 +6,7 @@ import com.uvarov.domain.models.Animal;
 import com.uvarov.domain.models.AnimalType;
 import com.uvarov.domain.models.AnimalsInteractor;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -29,14 +29,13 @@ public class AnimalsListPresenter extends MvpPresenter<AnimalsListView> {
     public AnimalsListPresenter() {
     }
 
-    @Override
-    protected void onFirstViewAttach() {
+    protected void loadAnimals() {
         disposable.add(animalsInteractor.requestAnimals(animalType)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<Animal>>() {
+                .subscribe(new Consumer<ArrayList<Animal>>() {
                     @Override
-                    public void accept(List<Animal> animals) throws Exception {
+                    public void accept(ArrayList<Animal> animals) throws Exception {
                         getViewState().showAnimalsList(animals);
                     }
                 }, new Consumer<Throwable>() {

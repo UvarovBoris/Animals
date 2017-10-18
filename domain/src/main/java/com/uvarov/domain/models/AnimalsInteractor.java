@@ -2,7 +2,7 @@ package com.uvarov.domain.models;
 
 import com.uvarov.domain.WebService;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -20,11 +20,11 @@ public class AnimalsInteractor {
     public AnimalsInteractor() {
     }
 
-    public Observable<List<Animal>> requestAnimals(AnimalType animalType) {
+    public Observable<ArrayList<Animal>> requestAnimals(AnimalType animalType) {
         return service.getAnimals(animalType.getName())
-                .flatMap(new Function<ApiResponse, ObservableSource<List<Animal>>>() {
+                .flatMap(new Function<ApiResponse, ObservableSource<ArrayList<Animal>>>() {
                     @Override
-                    public ObservableSource<List<Animal>> apply(@NonNull ApiResponse apiResponse) throws Exception {
+                    public ObservableSource<ArrayList<Animal>> apply(@NonNull ApiResponse apiResponse) throws Exception {
                         for(int i = 0; i < apiResponse.getData().size(); i++) {
                             apiResponse.getData().get(i).setId(i + 1);
                         }
