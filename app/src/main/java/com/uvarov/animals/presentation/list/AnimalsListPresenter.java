@@ -1,4 +1,4 @@
-package com.uvarov.animals.presentation;
+package com.uvarov.animals.presentation.list;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -16,7 +16,7 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 @InjectViewState
-public class AnimalsPresenter extends MvpPresenter<AnimalsView> {
+public class AnimalsListPresenter extends MvpPresenter<AnimalsListView> {
 
     @Inject
     AnimalsInteractor animalsInteractor;
@@ -26,7 +26,7 @@ public class AnimalsPresenter extends MvpPresenter<AnimalsView> {
     private AnimalType animalType;
 
     @Inject
-    public AnimalsPresenter() {
+    public AnimalsListPresenter() {
     }
 
     @Override

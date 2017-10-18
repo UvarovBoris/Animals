@@ -1,6 +1,6 @@
 package com.uvarov.animals.di;
 
-import com.uvarov.animals.presentation.AnimalsFragment;
+import com.uvarov.animals.presentation.list.AnimalsListFragment;
 
 import javax.inject.Singleton;
 
@@ -10,5 +10,5 @@ import dagger.Component;
 @Component(modules = {WebServiceDaggerModule.class})
 public interface AppDaggerComponent {
 
-    void inject(AnimalsFragment fragment);
+    void inject(AnimalsListFragment fragment);
 }

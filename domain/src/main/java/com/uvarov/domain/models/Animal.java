@@ -1,6 +1,8 @@
 package com.uvarov.domain.models;
 
-public class Animal {
+import java.io.Serializable;
+
+public class Animal implements Serializable {
 
     private String url;
 

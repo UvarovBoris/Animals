@@ -1,4 +1,4 @@
-package com.uvarov.animals.presentation;
+package com.uvarov.animals.presentation.list;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.uvarov.animals.R;
 
-public class AnimalsActivity extends AppCompatActivity {
+public class AnimalsListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +17,7 @@ public class AnimalsActivity extends AppCompatActivity {
 
         Fragment fragment = getSupportFragmentManager().findFragmentById(animalsFragmentId);
         if (fragment == null) {
-            fragment = new AnimalsFragment();
+            fragment = new AnimalsListFragment();
             getSupportFragmentManager()
                     .beginTransaction()
                     .add(animalsFragmentId, fragment)

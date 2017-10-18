@@ -1,4 +1,4 @@
-package com.uvarov.animals.presentation;
+package com.uvarov.animals.presentation.list;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -10,12 +10,12 @@ import com.uvarov.domain.models.Animal;
 
 import java.util.List;
 
-class AnimalsAdapter extends RecyclerView.Adapter<AnimalListItem> {
+class AnimalsListAdapter extends RecyclerView.Adapter<AnimalListItem> {
 
     private Context context;
     private List<Animal> animals;
 
-    public AnimalsAdapter(Context context, List<Animal> animals) {
+    public AnimalsListAdapter(Context context, List<Animal> animals) {
         this.context = context;
         this.animals = animals;
     }

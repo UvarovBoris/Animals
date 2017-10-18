@@ -1,4 +1,4 @@
-package com.uvarov.animals.presentation;
+package com.uvarov.animals.presentation.list;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,28 +23,28 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class AnimalsFragment extends MvpAppCompatFragment implements AnimalsView {
+public class AnimalsListFragment extends MvpAppCompatFragment implements AnimalsListView {
 
     @Inject
     @InjectPresenter
-    AnimalsPresenter animalsPresenter;
+    AnimalsListPresenter animalsListPresenter;
 
     @BindView(R.id.animalsRecyclerView)
     protected RecyclerView animalsRecyclerView;
 
-    private AnimalsAdapter animalsAdapter;
+    private AnimalsListAdapter animalsListAdapter;
 
     @ProvidePresenter
-    AnimalsPresenter provideAnimalsPresenter() {
-        animalsPresenter.setAnimalType(AnimalType.CAT);
-        return animalsPresenter;
+    AnimalsListPresenter provideAnimalsPresenter() {
+        animalsListPresenter.setAnimalType(AnimalType.CAT);
+        return animalsListPresenter;
     }
 
     @Override
     public void onCreate(Bundle saveState) {
         ((AnimalsApplication) getActivity().getApplication()).getAppDaggerComponent().inject(this);
         super.onCreate(saveState);
-        animalsAdapter = new AnimalsAdapter(getContext(), new ArrayList<Animal>());
+        animalsListAdapter = new AnimalsListAdapter(getContext(), new ArrayList<Animal>());
     }
 
     @Override
@@ -55,14 +55,14 @@ public class AnimalsFragment extends MvpAppCompatFragment implements AnimalsView
 
         animalsRecyclerView.setHasFixedSize(true);
         animalsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        animalsRecyclerView.setAdapter(animalsAdapter);
+        animalsRecyclerView.setAdapter(animalsListAdapter);
 
         return view;
     }
 
     @Override
     public void showAnimalsList(List<Animal> animals) {
-        animalsAdapter.setAnimals(animals);
-        animalsAdapter.notifyDataSetChanged();
+        animalsListAdapter.setAnimals(animals);
+        animalsListAdapter.notifyDataSetChanged();
     }
 }
