@@ -30,12 +30,11 @@ public class AnimalsListActivity extends AppCompatActivity {
 
         animalsContentFragmentId = R.id.animals_content;
 
-        Fragment fragment = getSupportFragmentManager().findFragmentById(animalsContentFragmentId);
-        if (fragment == null) {
-            fragment = AnimalsListFragment.newInstance(CAT);
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(animalsContentFragmentId);
+        if (currentFragment == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .add(animalsContentFragmentId, fragment, CAT.getName())
+                    .add(animalsContentFragmentId, AnimalsListFragment.newInstance(CAT), CAT.getName())
                     .commit();
         }
 
@@ -43,9 +42,9 @@ public class AnimalsListActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if (tab.getText().equals(getString(R.string.cats))) {
-                    showAnimalFragment(CAT);
+                    changeAnimalFragment(CAT);
                 } else if (tab.getText().equals(getString(R.string.dogs))) {
-                    showAnimalFragment(DOG);
+                    changeAnimalFragment(DOG);
                 }
             }
 
@@ -59,12 +58,29 @@ public class AnimalsListActivity extends AppCompatActivity {
         });
     }
 
-    private void showAnimalFragment(AnimalType animalType) {
-        AnimalsListFragment fragment = AnimalsListFragment.newInstance(animalType);
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(animalsContentFragmentId, fragment, animalType.getName())
-                .commit();
+    private void changeAnimalFragment(AnimalType animalType) {
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(animalsContentFragmentId);
+        Fragment newFragment = getSupportFragmentManager().findFragmentByTag(animalType.getName());
+//        if (currentFragment == null) {
+//            getSupportFragmentManager()
+//                    .beginTransaction()
+//                    .add(animalsContentFragmentId, AnimalsListFragment.newInstance(animalType), animalType.getName())
+//                    .commit();
+//        } else
+        if (newFragment == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .detach(currentFragment)
+                    .replace(animalsContentFragmentId, AnimalsListFragment.newInstance(animalType), animalType.getName())
+                    .commit();
+        } else {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .detach(currentFragment)
+                    .attach(newFragment)
+                    .commit();
+        }
+
     }
 
 }
