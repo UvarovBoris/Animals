@@ -2,4 +2,5 @@
     <string name="app_name">Animals</string>
     <string name="cats">Cats</string>
     <string name="dogs">Dogs</string>
+    <string name="animalsLoadingError">Animals loading error</string>
 </resources>

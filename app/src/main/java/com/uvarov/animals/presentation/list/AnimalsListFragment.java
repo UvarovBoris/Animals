@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -76,5 +77,10 @@ public class AnimalsListFragment extends MvpAppCompatFragment implements Animals
     public void showAnimalsList(List<Animal> animals) {
         animalsListAdapter.setAnimals(animals);
         animalsListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showAnimalsLoadingError() {
+        Toast.makeText(getActivity(), getString(R.string.animalsLoadingError), Toast.LENGTH_LONG).show();
     }
 }

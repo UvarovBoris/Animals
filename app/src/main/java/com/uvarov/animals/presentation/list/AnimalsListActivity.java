@@ -16,6 +16,8 @@ import static com.uvarov.domain.models.AnimalType.DOG;
 
 public class AnimalsListActivity extends AppCompatActivity {
 
+    private static final String ANIMAL_TAB_KEY = "animalTab";
+
     @BindView(R.id.animals_tabs)
     TabLayout animalsTabs;
 
@@ -30,8 +32,7 @@ public class AnimalsListActivity extends AppCompatActivity {
 
         animalsContentFragmentId = R.id.animals_content;
 
-        Fragment currentFragment = getSupportFragmentManager().findFragmentById(animalsContentFragmentId);
-        if (currentFragment == null) {
+        if (getCurrentFragment() == null) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .add(animalsContentFragmentId, AnimalsListFragment.newInstance(CAT), CAT.getName())
@@ -58,22 +59,20 @@ public class AnimalsListActivity extends AppCompatActivity {
         });
     }
 
+    private Fragment getCurrentFragment() {
+        return getSupportFragmentManager().findFragmentById(animalsContentFragmentId);
+    }
+
     private void changeAnimalFragment(AnimalType animalType) {
-        Fragment currentFragment = getSupportFragmentManager().findFragmentById(animalsContentFragmentId);
+        Fragment currentFragment = getCurrentFragment();
         Fragment newFragment = getSupportFragmentManager().findFragmentByTag(animalType.getName());
-//        if (currentFragment == null) {
-//            getSupportFragmentManager()
-//                    .beginTransaction()
-//                    .add(animalsContentFragmentId, AnimalsListFragment.newInstance(animalType), animalType.getName())
-//                    .commit();
-//        } else
         if (newFragment == null) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .detach(currentFragment)
                     .replace(animalsContentFragmentId, AnimalsListFragment.newInstance(animalType), animalType.getName())
                     .commit();
-        } else {
+        } else if (currentFragment != newFragment) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .detach(currentFragment)
@@ -83,4 +82,15 @@ public class AnimalsListActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(ANIMAL_TAB_KEY, animalsTabs.getSelectedTabPosition());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        animalsTabs.getTabAt(savedInstanceState.getInt(ANIMAL_TAB_KEY)).select();
+    }
 }

@@ -39,6 +39,11 @@ public class AnimalsListPresenter extends MvpPresenter<AnimalsListView> {
                     public void accept(List<Animal> animals) throws Exception {
                         getViewState().showAnimalsList(animals);
                     }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        getViewState().showAnimalsLoadingError();
+                    }
                 })
         );
     }
