@@ -21,7 +21,7 @@ public class AnimalsInteractor {
     }
 
     public Observable<List<Animal>> requestAnimals(AnimalType animalType) {
-        return service.getAnimals(animalType.getApiKey())
+        return service.getAnimals(animalType.getName())
                 .flatMap(new Function<ApiResponse, ObservableSource<List<Animal>>>() {
                     @Override
                     public ObservableSource<List<Animal>> apply(@NonNull ApiResponse apiResponse) throws Exception {

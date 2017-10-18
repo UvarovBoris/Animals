@@ -1,21 +1,27 @@
 package com.uvarov.domain.models;
 
-/**
- * Created by freeman on 17.10.2017.
- */
-
 public enum AnimalType {
 
     CAT("cat"),
-    DOG("dog");
+    DOG("dog"),
+    UNKNOWN("");
 
-    private String apiKey;
+    private String name;
 
-    AnimalType(String apiKey) {
-        this.apiKey = apiKey;
+    AnimalType(String name) {
+        this.name = name;
     }
 
-    public String getApiKey() {
-        return apiKey;
+    public String getName() {
+        return name;
+    }
+
+    public static AnimalType getByName(String name) {
+        for (AnimalType animalType : values()) {
+            if (animalType.getName().equals(name)) {
+                return animalType;
+            }
+        }
+        return UNKNOWN;
     }
 }

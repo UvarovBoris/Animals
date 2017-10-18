@@ -25,6 +25,8 @@ import butterknife.ButterKnife;
 
 public class AnimalsListFragment extends MvpAppCompatFragment implements AnimalsListView {
 
+    private static final String ANIMAL_TYPE_KEY = "animalType";
+
     @Inject
     @InjectPresenter
     AnimalsListPresenter animalsListPresenter;
@@ -36,8 +38,18 @@ public class AnimalsListFragment extends MvpAppCompatFragment implements Animals
 
     @ProvidePresenter
     AnimalsListPresenter provideAnimalsPresenter() {
-        animalsListPresenter.setAnimalType(AnimalType.CAT);
+        animalsListPresenter.setAnimalType((AnimalType) getArguments().getSerializable(ANIMAL_TYPE_KEY));
         return animalsListPresenter;
+    }
+
+    public static AnimalsListFragment newInstance(AnimalType animalType) {
+        AnimalsListFragment fragment = new AnimalsListFragment();
+
+        Bundle args = new Bundle();
+        args.putSerializable(ANIMAL_TYPE_KEY, animalType);
+        fragment.setArguments(args);
+
+        return fragment;
     }
 
     @Override

@@ -28,21 +28,24 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <FrameLayout
-            android:id="@+id/animalsContent"
+            android:id="@+id/animals_content"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
         <android.support.design.widget.TabLayout
+            android:id="@+id/animals_tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <android.support.design.widget.TabItem
+                android:id="@+id/cats_tab"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/cats" />
 
             <android.support.design.widget.TabItem
+                android:id="@+id/dogs_tab"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/dogs" />
