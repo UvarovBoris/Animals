@@ -60,6 +60,10 @@ public class AnimalsListFragment extends MvpAppCompatFragment implements Animals
         ((AnimalsApplication) getActivity().getApplication()).getAppDaggerComponent().inject(this);
         super.onCreate(saveState);
         animalsListAdapter = new AnimalsListAdapter(getContext(), new ArrayList<Animal>());
+
+        if (saveState != null) {
+            animals = (ArrayList<Animal>) saveState.getSerializable(ANIMAL_LIST_KEY);
+        }
     }
 
     @Override
@@ -72,26 +76,13 @@ public class AnimalsListFragment extends MvpAppCompatFragment implements Animals
         animalsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         animalsRecyclerView.setAdapter(animalsListAdapter);
 
-        if (savedInstanceState != null) {
-            restoreState(savedInstanceState);
-        } else {
-            init();
-        }
-
-        return view;
-    }
-
-    private void init() {
-        animalsListPresenter.loadAnimals();
-    }
-
-    private void restoreState(Bundle state) {
-        animals = (ArrayList<Animal>) state.getSerializable(ANIMAL_LIST_KEY);
         if (animals != null) {
             showAnimalsList(animals);
         } else {
             animalsListPresenter.loadAnimals();
         }
+
+        return view;
     }
 
     @Override
